@@ -35,7 +35,7 @@ export function GraduateProfile({ name, school, quote }: GraduateProfileProps) {
           </CardDescription>
         </CardHeader>
         
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4" >
           <Badge variant="outline" className="text-sm py-1 px-4 border-primary/40">
             Bachiller en Humanidades / Ciencias
           </Badge>

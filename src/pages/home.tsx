@@ -22,11 +22,16 @@ export const HomePage = () => {
   const DRIVE_LINK = "https://drive.google.com/drive/folders/1IHEwcKxax-QbzRdrCmwXOuxyWwLhWeJR?usp=sharing";
   return (
     <div className="flex flex-col min-h-screen pb-20 bg-background">
-      {/* 1. Hero Section (Portada) */}
-      <HeroSection  graduateName={GRADUATE_NAME} classYear="2025" />
+      {/* 1. Hero Section */}
+      <HeroSection graduateName={GRADUATE_NAME} classYear="2025" />
 
-      <div className="container max-w-5xl mx-auto px-4 space-y-12 -mt-8 relative z-10">
-        {/* 2. Contador (Flotando sobre el hero ligeramente) */}
+      {/* --- AGREGAMOS EL ID AQUÍ --- */}
+      {/* Al poner id="event-details" en este div contenedor, el botón bajará hasta aquí */}
+      <div 
+        id="event-details" 
+        className="container max-w-5xl mx-auto px-4 space-y-12 -mt-8 relative z-10"
+      >
+        {/* 2. Contador */}
         <Countdown targetDate={GRADUATION_DATE} />
 
         {/* 3. Perfil del Graduado */}
@@ -34,6 +39,7 @@ export const HomePage = () => {
           name={GRADUATE_NAME}
           school={SCHOOL_NAME}
           quote={QUOTE}
+          
         />
 
         <Separator className="my-8" />

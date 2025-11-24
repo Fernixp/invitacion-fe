@@ -9,17 +9,18 @@ import {
 } from "@/components/ui/card";
 
 interface EventLocationProps {
-  date: string; // Prop agregada (faltaba en tu snippet)
+  date: string;
   placeName: string;
   address: string;
   time: string;
-  googleMapsLink: string; // Link directo para "Cómo llegar"
+  googleMapsLink: string;
 }
 
 export function EventLocation({ date, placeName, address, time, googleMapsLink }: EventLocationProps) {
   return (
-    <section className="py-8 px-4">
-      <div className="text-center mb-8 space-y-2">
+    <section className="py-8 px-4" >
+      <div className="text-center mb-8 space-y-2"  
+          id="location-map">
         <h2 className="text-3xl font-bold tracking-tight">Celebración</h2>
         <p className="text-muted-foreground">Te espero para compartir este momento especial</p>
       </div>
@@ -34,7 +35,7 @@ export function EventLocation({ date, placeName, address, time, googleMapsLink }
           </CardHeader>
           <CardContent className="space-y-5">
             
-            {/* Fecha (Agregado) */}
+            {/* Fecha */}
             <div className="flex items-start gap-3 border p-3 rounded-lg bg-muted/10">
                <CalendarDays className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                <div>
@@ -72,9 +73,19 @@ export function EventLocation({ date, placeName, address, time, googleMapsLink }
           </CardFooter>
         </Card>
 
-        {/* Mapa Embed */}
-        <Card className="md:col-span-3 overflow-hidden h-[300px] md:h-auto min-h-[300px] shadow-sm">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3825.8514479360156!2d-68.237534!3d-16.483058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDI4JzU5LjAiUyA2OMKwMTQnMTUuMSJX!5e0!3m2!1ses-419!2sbo!4v1763952530418!5m2!1ses-419!2sbo" width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+        {/* Mapa Embed - AQUÍ ESTÁ EL ID QUE FALTABA */}
+        <Card  
+          className="md:col-span-3 overflow-hidden h-[300px] md:h-auto min-h-[300px] shadow-sm"
+        >
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3825.8514479360156!2d-68.237534!3d-16.483058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDI4JzU5LjAiUyA2OMKwMTQnMTUuMSJX!5e0!3m2!1ses-419!2sbo!4v1763952530418!5m2!1ses-419!2sbo" 
+            width="600" 
+            height="450" 
+            style={{ border: 0, width: '100%', height: '100%' }} 
+            allowFullScreen 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
         </Card>
       </div>
     </section>
