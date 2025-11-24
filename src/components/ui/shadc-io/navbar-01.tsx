@@ -2,7 +2,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom"; // <--- IMPORTANTE: Importamos Link y useLocation
+import { Link, useLocation } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -16,54 +16,35 @@ import {
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
 
-// Simple logo component for the navbar
-// Simple logo component for the navbar
-const Logo = (props: React.SVGAttributes<SVGElement>) => {
+// --- LOGO COMPONENT ---
+const Logo = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className="flex flex-col items-center justify-center leading-tight select-none">
-      {/* Ícono */}
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 324 323"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-        className="text-primary w-10 h-10"
-      >
-        <rect
-          x="88.1023"
-          y="144.792"
-          width="151.802"
-          height="36.5788"
-          rx="18.2894"
-          transform="rotate(-38.5799 88.1023 144.792)"
-          fill="currentColor"
-        />
-        <rect
-          x="85.3459"
-          y="244.537"
-          width="151.802"
-          height="36.5788"
-          rx="18.2894"
-          transform="rotate(-38.5799 85.3459 244.537)"
-          fill="currentColor"
-        />
-      </svg>
+    <div className="flex items-center gap-4 select-none" {...props}>
+      {/* 1. Icono (Birrete) */}
+      <img 
+        src="/birrete.png" 
+        alt="Logo Graduación" 
+        className="w-12 h-12 object-contain drop-shadow-sm" 
+      />
 
-      {/* Separador */}
-      <div className="h-[1px] w-6 bg-primary/70 my-1" />
+      {/* 2. Separador Vertical (Estilo de la imagen) */}
+      {/* Usamos bg-primary para que se adapte al tema, o un color fijo si prefieres */}
+      <div className="h-10 w-[3px] bg-[#0f3036] dark:bg-primary rounded-full opacity-90" />
 
-      {/* Texto */}
-      <span className="text-[11px] font-medium tracking-wide text-primary">
-        Evento de Graduación
-      </span>
+      {/* 3. Textos */}
+      <div className="flex flex-col justify-center -space-y-0.5">
+        <span className="text-xl font-bold tracking-tight text-foreground leading-none">
+          Invitación
+        </span>
+        <span className="text-sm font-medium text-muted-foreground">
+          Evento de Graduación
+        </span>
+      </div>
     </div>
   );
 };
 
-
-// Hamburger icon component
+// --- HAMBURGER ICON ---
 const HamburgerIcon = ({
   className,
   ...props
@@ -96,7 +77,7 @@ const HamburgerIcon = ({
   </svg>
 );
 
-// Types
+// --- TYPES ---
 export interface Navbar01NavLink {
   href: string;
   label: string;
@@ -107,19 +88,16 @@ export interface Navbar01Props extends React.HTMLAttributes<HTMLElement> {
   logo?: React.ReactNode;
   logoHref?: string;
   navigationLinks?: Navbar01NavLink[];
-  signInText?: string;
-  signInHref?: string;
-  ctaText?: string;
-  ctaHref?: string;
-  onSignInClick?: () => void;
+  onSignInClick?: () => void; // Dejamos esto por si quieres usarlo luego
   onCtaClick?: () => void;
 }
 
 // Default navigation links
 const defaultNavigationLinks: Navbar01NavLink[] = [
-  { href: "/", label: "Home", active: true },
+  { href: "/", label: "Home" },
 ];
 
+// --- MAIN COMPONENT ---
 export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
   (
     {
@@ -127,19 +105,13 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       logo = <Logo />,
       logoHref = "/",
       navigationLinks = defaultNavigationLinks,
-      signInText = "Iniciar sesión",
-      signInHref = "/login", // Default ruta
-      ctaText = "Registrarse",
-      ctaHref = "/register", // Default ruta
-      onSignInClick,
-      onCtaClick,
       ...props
     },
     ref
   ) => {
     const [isMobile, setIsMobile] = useState(false);
     const containerRef = useRef<HTMLElement>(null);
-    const location = useLocation(); // Hook para saber en qué ruta estamos
+    const location = useLocation(); 
 
     useEffect(() => {
       const checkWidth = () => {
@@ -158,7 +130,6 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       };
     }, []);
 
-    // Combine refs
     const combinedRef = React.useCallback(
       (node: HTMLElement | null) => {
         containerRef.current = node;
@@ -175,20 +146,21 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
       <header
         ref={combinedRef}
         className={cn(
-          "sticky top-0 z-50 w-full border-b backdrop-blur-sm px-4 md:px-6 **:no-underline",
+          "sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md px-4 md:px-6 shadow-sm",
           className
         )}
         {...props}
       >
-        <div className="container mx-auto flex h-16 max-w-screen-2xl items-center justify-between gap-4">
-          {/* Left side */}
+        <div className="container mx-auto flex h-20 max-w-screen-2xl items-center justify-between gap-4">
+          {/* Left side: Logo & Nav */}
           <div className="flex items-center gap-2">
-            {/* Mobile menu trigger */}
+            
+            {/* Mobile Menu Trigger */}
             {isMobile && (
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
-                    className="group h-9 w-9 hover:bg-accent hover:text-accent-foreground"
+                    className="group h-9 w-9 hover:bg-accent hover:text-accent-foreground mr-2"
                     variant="ghost"
                     size="icon"
                   >
@@ -200,7 +172,6 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
                     <NavigationMenuList className="flex-col items-start gap-1">
                       {navigationLinks.map((link, index) => (
                         <NavigationMenuItem key={index} className="w-full">
-                          {/* Enlace Móvil con Link */}
                           <Link
                             to={link.href}
                             className={cn(
@@ -220,47 +191,39 @@ export const Navbar01 = React.forwardRef<HTMLElement, Navbar01Props>(
               </Popover>
             )}
 
-            {/* Main nav */}
-            <div className="flex items-center gap-6">
-              {/* Logo con Link */}
-              <Link
-                to={logoHref}
-                className="flex items-start space-x-2 text-primary hover:text-primary/90 transition-colors cursor-pointer no-underline"
-              >
-                <img src="/birrete.png" alt="" className="w-8 h-8" />
-                <span className="hidden font-bold text-xl sm:inline-block">
-                  Invitación <br />
-                  <span className="text-xs">Evento de Graduación</span>
-                </span>
-              </Link>
+            {/* Logo Link */}
+            <Link
+              to={logoHref}
+              className="flex items-center space-x-2 transition-opacity hover:opacity-90 no-underline outline-none"
+            >
+              {logo}
+            </Link>
 
-              {/* Navigation menu Desktop */}
-              {!isMobile && (
-                <NavigationMenu className="flex">
-                  <NavigationMenuList className="gap-1">
-                    {navigationLinks.map((link, index) => (
-                      <NavigationMenuItem key={index}>
-                        {/* Enlace Desktop con Link */}
-                        <Link
-                          to={link.href}
-                          className={cn(
-                            "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
-                            location.pathname === link.href
-                              ? "bg-accent text-accent-foreground"
-                              : "text-foreground/80 hover:text-foreground"
-                          )}
-                        >
-                          {link.label}
-                        </Link>
-                      </NavigationMenuItem>
-                    ))}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              )}
-            </div>
+            {/* Desktop Navigation */}
+            {!isMobile && (
+              <NavigationMenu className="flex ml-8">
+                <NavigationMenuList className="gap-1">
+                  {navigationLinks.map((link, index) => (
+                    <NavigationMenuItem key={index}>
+                      <Link
+                        to={link.href}
+                        className={cn(
+                          "group inline-flex h-9 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer no-underline",
+                          location.pathname === link.href
+                            ? "bg-accent text-accent-foreground"
+                            : "text-foreground/60 hover:text-foreground"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            )}
           </div>
 
-          {/* Right side */}
+          {/* Right side: Actions */}
           <div className="flex items-center gap-3">
             <ModeToggle />
           </div>
