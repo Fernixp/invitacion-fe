@@ -1,5 +1,4 @@
-import { GraduationCap, CalendarDays, MapPin, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { GraduationCap} from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 
@@ -20,12 +19,6 @@ interface Confetti {
 export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
   const [confetti, setConfetti] = useState<Confetti[]>([]);
   
-  const scrollToDetails = () => {
-    const element = document.getElementById('event-details');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   // Generar confeti al montar el componente
   useEffect(() => {

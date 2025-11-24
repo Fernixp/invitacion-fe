@@ -1,4 +1,4 @@
-import { School, Award, Quote, GraduationCap } from "lucide-react";
+import { School, Award,  GraduationCap } from "lucide-react";
 import {
   Card,
   CardContent,

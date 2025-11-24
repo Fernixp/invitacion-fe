@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { ChevronsDown } from "lucide-react";
 
 interface CountdownProps {
   targetDate: Date;
