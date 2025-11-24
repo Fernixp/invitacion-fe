@@ -50,10 +50,10 @@ export function Countdown({ targetDate }: CountdownProps) {
 
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-6 animate-in fade-in zoom-in duration-700">
-      {/* Flechas indicadoras (Doble Chevron como en la imagen) */}
-      <div className="animate-bounce duration-2000">
-        <ChevronsDown className="text-muted-foreground/40 w-8 h-8" />
-      </div>
+
+      <h1 className="flex items-center text-5xl">
+          Llega el día:
+        </h1>
 
       {/* Tarjeta Horizontal */}
       <Card className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-6 py-6 px-6 md:px-12 bg-card/80 backdrop-blur-md shadow-2xl border-primary/5 rounded-2xl md:rounded-full">
