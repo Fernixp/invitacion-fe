@@ -1,4 +1,4 @@
-import { MapPin, Clock } from "lucide-react";
+import { MapPin, Clock, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,14 +9,14 @@ import {
 } from "@/components/ui/card";
 
 interface EventLocationProps {
+  date: string; // Prop agregada (faltaba en tu snippet)
   placeName: string;
   address: string;
   time: string;
-  mapUrl: string; // URL de embed de Google Maps
   googleMapsLink: string; // Link directo para "Cómo llegar"
 }
 
-export function EventLocation({ placeName, address, time, mapUrl, googleMapsLink }: EventLocationProps) {
+export function EventLocation({ date, placeName, address, time, googleMapsLink }: EventLocationProps) {
   return (
     <section className="py-8 px-4">
       <div className="text-center mb-8 space-y-2">
@@ -26,22 +26,42 @@ export function EventLocation({ placeName, address, time, mapUrl, googleMapsLink
 
       <div className="grid md:grid-cols-5 gap-6 max-w-5xl mx-auto">
         {/* Tarjeta de Información */}
-        <Card className="md:col-span-2 flex flex-col justify-center h-full border-l-4 border-l-primary">
+        <Card className="md:col-span-2 flex flex-col justify-center h-full border-l-4 border-l-primary shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
-              <MapPin className="w-5 h-5 text-primary" />
-              Ubicación
+            <CardTitle className="text-xl font-bold text-foreground">
+              Detalles del evento
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-lg">{placeName}</h3>
-              <p className="text-muted-foreground">{address}</p>
+          <CardContent className="space-y-5">
+            
+            {/* Fecha (Agregado) */}
+            <div className="flex items-start gap-3 border p-3 rounded-lg bg-muted/10">
+               <CalendarDays className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+               <div>
+                 <h4 className="font-bold text-sm">Fecha:</h4>
+                 <p className="text-muted-foreground text-sm leading-snug">{date}</p>
+               </div>
             </div>
-            <div className="flex items-center gap-2 text-foreground/80">
-              <Clock className="w-4 h-4 text-primary" />
-              <span className="font-medium">{time}</span>
+
+            {/* Hora */}
+            <div className="flex items-start gap-3 border p-3 rounded-lg bg-muted/10">
+              <Clock className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+              <div>
+                 <h4 className="font-bold text-sm">Hora:</h4>
+                 <p className="text-muted-foreground text-sm leading-snug">{time}</p>
+              </div>
             </div>
+
+            {/* Ubicación */}
+            <div className="flex items-start gap-3 border p-3 rounded-lg bg-muted/10">
+               <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+               <div>
+                  <h4 className="font-bold text-sm">Ubicación:</h4>
+                  <p className="text-foreground text-sm font-medium">{placeName}</p>
+                  <p className="text-muted-foreground text-xs mt-0.5">{address}</p>
+               </div>
+            </div>
+
           </CardContent>
           <CardFooter>
             <Button className="w-full" asChild>
@@ -53,17 +73,8 @@ export function EventLocation({ placeName, address, time, mapUrl, googleMapsLink
         </Card>
 
         {/* Mapa Embed */}
-        <Card className="md:col-span-3 overflow-hidden h-[300px] md:h-auto min-h-[300px]">
-          <iframe
-            src={mapUrl}
-            width="100%"
-            height="100%"
-            style={{ border: 0, minHeight: "300px" }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            className="w-full h-full grayscale hover:grayscale-0 transition-all duration-500"
-          />
+        <Card className="md:col-span-3 overflow-hidden h-[300px] md:h-auto min-h-[300px] shadow-sm">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3825.8514479360156!2d-68.237534!3d-16.483058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTbCsDI4JzU5LjAiUyA2OMKwMTQnMTUuMSJX!5e0!3m2!1ses-419!2sbo!4v1763952530418!5m2!1ses-419!2sbo" width="600" height="450" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
         </Card>
       </div>
     </section>

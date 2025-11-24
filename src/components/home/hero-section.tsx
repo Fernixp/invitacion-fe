@@ -79,10 +79,6 @@ export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Flecha indicadora para bajar */}
-      <div className="absolute bottom-8 animate-bounce delay-1000 duration-1000 text-muted-foreground/50">
-        <ChevronDown className="h-8 w-8" />
-      </div>
     </section>
   );
 }

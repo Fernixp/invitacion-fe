@@ -32,11 +32,11 @@ export function Countdown({ targetDate }: CountdownProps) {
   });
 
   const TimeBox = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center min-w-[4rem] md:min-w-[5rem]">
-      <span className="text-3xl md:text-5xl font-bold text-foreground tabular-nums leading-none">
+    <div className="flex flex-col items-center min-w-[3rem] md:min-w-[5rem]">
+      <span className="text-2xl md:text-5xl font-bold text-foreground tabular-nums leading-none">
         {value < 10 ? `0${value}` : value}
       </span>
-      <span className="text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground mt-2">
+      <span className="text-[8px] md:text-xs font-semibold uppercase tracking-[0.15em] text-muted-foreground mt-1 md:mt-2">
         {label}
       </span>
     </div>
