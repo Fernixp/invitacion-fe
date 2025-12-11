@@ -31,7 +31,8 @@ export function Countdown({ targetDate }: CountdownProps) {
   });
 
   const TimeBox = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center min-w-[3rem] md:min-w-[5rem]">
+    // Reduje el min-w en móvil para asegurar que entren los 4 bloques
+    <div className="flex flex-col items-center min-w-[2.5rem] md:min-w-[5rem]">
       <span className="text-2xl md:text-5xl font-bold text-foreground tabular-nums leading-none">
         {value < 10 ? `0${value}` : value}
       </span>
@@ -42,7 +43,7 @@ export function Countdown({ targetDate }: CountdownProps) {
   );
 
   const Separator = () => (
-    <div className="text-2xl md:text-4xl text-muted-foreground/30 font-light -mt-4 select-none pb-2">
+    <div className="text-xl md:text-4xl text-muted-foreground/30 font-light -mt-3 md:-mt-4 select-none pb-2">
       :
     </div>
   );
@@ -50,12 +51,16 @@ export function Countdown({ targetDate }: CountdownProps) {
   return (
     <section className="flex flex-col items-center justify-center gap-8 py-6 animate-in fade-in zoom-in duration-700">
 
-      <h1 className="flex items-center text-5xl">
+      <h1 className="flex items-center text-3xl md:text-5xl font-bold tracking-tight">
           Llega el día:
-        </h1>
+      </h1>
 
-      {/* Tarjeta Horizontal */}
-      <Card className="flex flex-row flex-wrap items-center justify-center gap-3 md:gap-6 py-6 px-6 md:px-12 bg-card/80 backdrop-blur-md shadow-2xl border-primary/5 rounded-2xl md:rounded-full">
+      {/* CAMBIOS REALIZADOS:
+         1. 'flex-nowrap': Obliga a no bajar de línea.
+         2. 'gap-2': Reducido el espacio en móvil para que quepa mejor.
+         3. 'px-4': Reducido el padding lateral en móvil.
+      */}
+      <Card className="flex flex-row flex-nowrap items-center justify-center gap-2 md:gap-6 py-6 px-4 md:px-12 bg-card/80 backdrop-blur-md shadow-2xl border-primary/5 rounded-2xl md:rounded-full w-full max-w-fit mx-auto">
         <TimeBox value={timeLeft.days} label="Días" />
         <Separator />
         <TimeBox value={timeLeft.hours} label="Hs" />

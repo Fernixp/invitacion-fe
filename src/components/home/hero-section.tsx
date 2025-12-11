@@ -1,4 +1,4 @@
-import { GraduationCap} from "lucide-react";
+import { GraduationCap, ChevronDown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useEffect, useState } from "react";
 
@@ -18,7 +18,6 @@ interface Confetti {
 
 export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
   const [confetti, setConfetti] = useState<Confetti[]>([]);
-  
 
   // Generar confeti al montar el componente
   useEffect(() => {
@@ -55,8 +54,25 @@ export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
     }, 3000);
   };
 
+  // --- CORRECCIÓN AQUÍ ---
+  // Función para bajar suavemente considerando la altura del navbar
+  const scrollToDetails = () => {
+    const element = document.getElementById('event-details');
+    if (element) {
+      // Altura aproximada del navbar (80px) + un poco de espacio extra (20px) = 100px
+      const headerOffset = 100; 
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
+
   return (
-    <section className="relative flex flex-col items-center justify-center text-center min-h-[85vh] w-full overflow-hidden pt-20 pb-10">
+    <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] w-full overflow-hidden pt-20 pb-10">
       
       {/* Confeti animado */}
       {confetti.map((piece) => (
@@ -103,7 +119,7 @@ export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
       <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-cyan-800/10 rounded-full blur-3xl animate-pulse delay-700" />
       <div className="absolute top-1/2 right-1/4 w-24 h-24 bg-slate-700/10 rounded-full blur-2xl animate-pulse delay-300" />
 
-      <div className="container px-4 flex flex-col items-center gap-8 z-10">
+      <div className="container px-4 flex flex-col items-center gap-8 z-10 flex-1 justify-center">
         
         {/* Badge de la clase con animación mejorada */}
         <div 
@@ -138,28 +154,19 @@ export function HeroSection({ graduateName, classYear }: HeroSectionProps) {
           <br />
           <span className="font-semibold text-foreground/80">Acompáñame a celebrar el comienzo de mi vida profesional.</span>
         </p>        
+      </div>
 
-        {/* Botones de acción mejorados con efectos hover */}
-        {/* <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500 pt-4">
-          
-          <Button 
-            size="lg" 
-            className="hover:cursor-pointer rounded-full h-14 px-8 text-lg shadow-xl shadow-slate-700/30 hover:shadow-2xl hover:shadow-slate-700/40 hover:scale-105 transition-all duration-300 bg-gradient-to-r from-slate-700 to-cyan-700 hover:from-slate-800 hover:to-cyan-800"
-            onClick={() => document.getElementById('location-map')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <MapPin className="mr-2 h-5 w-5" />
-            Cómo Llegar
-          </Button>
+      {/* Indicador de Deslizamiento (Scroll Down) */}
+      <div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer animate-in fade-in slide-in-from-top-4 duration-1000 delay-1000 z-20"
+        onClick={scrollToDetails}
+      >
+        <span className="text-xs md:text-sm font-medium text-muted-foreground/80 uppercase tracking-widest animate-pulse">
+          Desliza para ver más
+        </span>
+        <div className="bg-background/20 backdrop-blur-sm p-2 rounded-full border border-primary/20 hover:bg-background/40 transition-colors animate-bounce shadow-lg">
+          <ChevronDown className="w-6 h-6 text-primary" />
         </div>
-        
-        <div className="mt-12 animate-bounce opacity-50 hover:opacity-100 transition-opacity cursor-pointer" onClick={scrollToDetails}>
-          <div className="flex flex-col items-center gap-2 text-muted-foreground text-sm">
-            <span>Desliza para más</span>
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div> */}
       </div>
 
     </section>
