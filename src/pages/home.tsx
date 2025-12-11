@@ -7,16 +7,16 @@ import { Separator } from "@/components/ui/separator";
 
 export const HomePage = () => {
   // CONFIGURACIÓN DE DATOS (Puedes mover esto a un archivo de config después)
-  const GRADUATION_DATE = new Date("2025-12-13T19:00:00"); // Fecha objetivo
+  const GRADUATION_DATE = new Date("2025-12-13T20:00:00"); // Fecha objetivo
   const GRADUATE_NAME = "Aaron Josue Lluta Patiño";
-  const SCHOOL_NAME = "Colegio San Francisco";
+  const SCHOOL_NAME = "Fray Bernardino de Cárdenas";
   const QUOTE =
     "Lo que sueñas hoy, será tu realidad mañana si trabajas por ello.";
 
   // Datos del evento
-  const EVENT_PLACE = "En su domicilio";
-  const EVENT_ADDRESS = "Calle Julio Mendez #, Zona El Alto";
-  const EVENT_TIME = "Ceremonia: 19:00 hrs | Recepción: 20:30 hrs";
+  const EVENT_PLACE = "Una cuadra antes de la altura Parada 8";
+  const EVENT_ADDRESS = "Calle Julio Mendez #5130, Zona El Alto";
+  const EVENT_TIME = "Recepción: 20:00 hrs";
   // URL de embed de Google Maps (ejemplo genérico)
   const MAP_LINK = "https://maps.app.goo.gl/SQHBo2mE56xCdPXdA";
   const DRIVE_LINK =
