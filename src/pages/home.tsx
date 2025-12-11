@@ -16,7 +16,7 @@ export const HomePage = () => {
   // Datos del evento
   const EVENT_PLACE = "Una cuadra antes de la altura Parada 8";
   const EVENT_ADDRESS = "Calle Julio Mendez #5130, Zona El Alto";
-  const EVENT_TIME = "Recepción: 20:00 hrs";
+  const EVENT_TIME = "Ceremonia: 19:00 hrs | Recepción: 20:00 hrs";
   // URL de embed de Google Maps (ejemplo genérico)
   const MAP_LINK = "https://maps.app.goo.gl/SQHBo2mE56xCdPXdA";
   const DRIVE_LINK =
